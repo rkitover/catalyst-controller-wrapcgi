@@ -62,7 +62,7 @@ is($response->content, 'foo:bar bar:baz',
     'POST to Perl CGI File through a forward via cgi_action');
 
 $response = request '/my-bin/path/testdata.pl';
-is($response->content, "testing\n",
+like($response->content, qr/^testing\r?\n\z/,
     'scripts with __DATA__ sections work');
 
 $response = request '/my-bin/pathinfo.pl/path/info';
