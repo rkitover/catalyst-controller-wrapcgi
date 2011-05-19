@@ -1,6 +1,6 @@
 use inc::Module::Install 0.91;
 
-require Module::Install::ReadmeFromPod;
+use Module::Install::ReadmeFromPod ();
 
 name     'Catalyst-Controller-WrapCGI';
 all_from 'lib/Catalyst/Controller/WrapCGI.pm';
