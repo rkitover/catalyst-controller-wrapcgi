@@ -15,7 +15,7 @@ CatalystX::GlobalContext - Export Catalyst Context
 
 =cut
 
-our $VERSION = '0.031';
+our $VERSION = '0.032';
 
 =head1 SYNOPSIS
 
