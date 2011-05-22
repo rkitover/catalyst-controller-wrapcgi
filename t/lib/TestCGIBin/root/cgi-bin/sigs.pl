@@ -5,8 +5,8 @@ use warnings;
 
 use CGI ':standard';
 
-BEGIN { $SIG{USR1} = 'IGNORE'; }
+BEGIN { $SIG{INT} = 'IGNORE'; }
 
-$SIG{USR1} = 'IGNORE';
+$SIG{INT} = 'IGNORE';
 
 print header;

@@ -186,7 +186,7 @@ sub register_actions {
     $self->next::method($app, @_);
 
 # Tell Static::Simple to ignore cgi_dir
-    if ($cgi_bin =~ /^@{[ $app->path_to('root') ]}/) {
+    if ($cgi_bin =~ /^\Q@{[ $app->path_to('root') ]}\E/) {
         my $rel = File::Spec->abs2rel($cgi_bin, $app->path_to('root'));
 
         if (!any { $_ eq $rel }
@@ -250,6 +250,15 @@ L</wrap_perl_cgi>.
 sub is_perl_cgi {
     my ($self, $cgi) = @_;
 
+    if ($^O eq 'MSWin32') {
+        # the fork code fails on Win32
+        eval { $self->wrap_perl_cgi($cgi, '__DUMMY__') };
+        my $success = $@ ? 0 : 1;
+        require Class::Unload;
+        Class::Unload->unload($self->cgi_package('__DUMMY__'));
+        return $success;
+    }
+
     my (undef, $tempfile) = tempfile;
 
     my $pid = fork;
@@ -298,8 +307,22 @@ C<exit()>.
 sub wrap_perl_cgi {
     my ($self, $cgi, $action_name) = @_;
 
-    return CGI::Compile->compile($cgi,
-        "Catalyst::Controller::CGIBin::_CGIs_::$action_name");
+    return CGI::Compile->compile($cgi, $self->cgi_package($action_name));
+}
+
+=head2 cgi_package
+
+C<< $self->cgi_package($action_name) >>
+
+Returns the package name a Perl CGI is compiled into for a given
+C<$action_name>.
+
+=cut
+
+sub cgi_package {
+    my ($self, $action_name) = @_;
+
+    return "Catalyst::Controller::CGIBin::_CGIs_::$action_name";
 }
 
 =head2 wrap_nonperl_cgi

@@ -19,6 +19,8 @@ requires 'Task::Weaken';
 requires 'LWP';
 requires 'Moose';
 
+requires 'Class::Unload' if $^O eq 'MSWin32';
+
 test_requires 'Test::More' => '0.92';
 test_requires 'Catalyst::Plugin::Static::Simple';
 test_requires 'CGI';
