@@ -1,5 +1,8 @@
 Revision history for Catalyst-Controller-WrapCGI
 
+0.033  2011-05-24 13:44:33
+    - re-release with unix line ends
+
 0.032  2011-05-22 09:19:36
     - now works on Win32
 
