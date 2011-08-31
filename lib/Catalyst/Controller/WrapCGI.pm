@@ -21,7 +21,7 @@ Catalyst::Controller::WrapCGI - Run CGIs in Catalyst
 
 =cut
 
-our $VERSION = '0.033';
+our $VERSION = '0.034';
 
 =head1 SYNOPSIS
 
