@@ -61,6 +61,8 @@ SKIP: {
     if $Catalyst::VERSION < 5.80005;
 
   $ENV{REMOTE_USER} = 'TEST_USER';
-  $response = request '/cgi-bin/test_remote_user.cgi';
+  $response = request( '/cgi-bin/test_remote_user.cgi',
+                       { extra_env => { REMOTE_USER => 'TEST_USER' } },
+                       );
   is($response->content, 'TEST_USER', 'REMOTE_USER was passed');
 }
