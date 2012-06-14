@@ -163,7 +163,7 @@ sub wrap_cgi {
   if ($body) { # Slurp from body filehandle
     local $/; $body_content = <$body>;
   } else {
-    my $body_params = $c->req->body_parameters;
+    my $body_params = $c->req->body_parameters || {};
 
     if (my %uploads = %{ $c->req->uploads }) {
       my $post = POST 'http://localhost/',
