@@ -1,5 +1,8 @@
 Revision history for Catalyst-Controller-WrapCGI
 
+0.035  2012-06-14 16:53:52
+    - fix test failures with Catalyst-Runtime-5.90012 (rbuels)
+
 0.034  2011-08-31 22:29:23
     - fixed t/wrap-cgi.t test for Catalyst 5.9+ (rbuels)
 
