@@ -1,6 +1,8 @@
 Revision history for Catalyst-Controller-WrapCGI
 
 {{$NEXT}}
+
+0.036 2015-11-30 16:28:22
     - seek body fh back to 0 in wrap_cgi (RT#106569)
     - fix warnings in tests
     - convert to dzil
