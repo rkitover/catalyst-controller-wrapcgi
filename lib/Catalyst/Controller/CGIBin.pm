@@ -1,3 +1,4 @@
+use utf8;
 package Catalyst::Controller::CGIBin;
 
 use Moose;
@@ -21,10 +22,6 @@ use namespace::clean -except => 'meta';
 =head1 NAME
 
 Catalyst::Controller::CGIBin - Serve CGIs from root/cgi-bin
-
-=cut
-
-our $VERSION = '0.035';
 
 =head1 SYNOPSIS
 
@@ -190,8 +187,8 @@ sub register_actions {
         my $rel = File::Spec->abs2rel($cgi_bin, $app->path_to('root'));
 
         if (!any { $_ eq $rel }
-                @{ $app->config->{static}{ignore_dirs}||[] }) {
-            push @{ $app->config->{static}{ignore_dirs} }, $rel;
+                @{ $app->config->{'Plgin::Static::Simple'}{ignore_dirs}||[] }) {
+            push @{ $app->config->{'Plugin::Static::Simple'}{ignore_dirs} }, $rel;
         }
     }
 }
@@ -377,38 +374,13 @@ L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Catalyst-Controller-WrapCGI>.
 I will be notified, and then you'll automatically be notified of progress on
 your bug as I make changes.
 
-=head1 SUPPORT
-
-More information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Catalyst-Controller-WrapCGI>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Catalyst-Controller-WrapCGI>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Catalyst-Controller-WrapCGI>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Catalyst-Controller-WrapCGI>
-
-=back
-
 =head1 AUTHOR
 
-See L<Catalyst::Controller::WrapCGI/AUTHOR> and
-L<Catalyst::Controller::WrapCGI/CONTRIBUTORS>.
+Rafael Kitover <rkitover@gmail.com>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright (c) 2008-2009 L<Catalyst::Controller::WrapCGI/AUTHOR> and
+Copyright (c) 2008-2015 Rafael Kitover <rkitover@gmail.com> and
 L<Catalyst::Controller::WrapCGI/CONTRIBUTORS>.
 
 This program is free software; you can redistribute it and/or modify it
@@ -416,5 +388,6 @@ under the same terms as Perl itself.
 
 =cut
 
-1; # End of Catalyst::Controller::CGIBin
+__PACKAGE__; # End of Catalyst::Controller::CGIBin
+
 # vim:et sw=4 sts=4 tw=0:

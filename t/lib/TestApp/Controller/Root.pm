@@ -7,8 +7,8 @@ __PACKAGE__->config->{namespace} = '';
 
 my $cgi = sub {
     my $cgi = CGI->new;
-    print $cgi->header;
-    print 'foo:',$cgi->param('foo'),' bar:',$cgi->param('bar');
+    print $cgi->header(-charset => 'utf-8');
+    print 'foo:',~~$cgi->param('foo'),' bar:',~~$cgi->param('bar');
     if (my $fh = $cgi->param('baz')) {
       local $/;
       print ' baz:',<$fh>;
@@ -30,7 +30,7 @@ sub test_path_info : Path('/cgi-bin/test_pathinfo.cgi') {
 
     $self->cgi_to_response($c, sub {
         my $cgi = CGI->new;
-        print $cgi->header;
+        print $cgi->header(-charset => 'utf-8');
         print $ENV{PATH_INFO}
     });
 }
@@ -40,7 +40,7 @@ sub test_filepath_info : Path('/cgi-bin/test_filepathinfo.cgi') {
 
     $self->cgi_to_response($c, sub {
         my $cgi = CGI->new;
-        print $cgi->header;
+        print $cgi->header(-charset => 'utf-8');
         print $ENV{FILEPATH_INFO}
     });
 }
@@ -52,7 +52,7 @@ sub test_script_name : Chained('test_script_name_root') PathPart('test_scriptnam
 
     $self->cgi_to_response($c, sub {
         my $cgi = CGI->new;
-        print $cgi->header;
+        print $cgi->header(-charset => 'utf-8');
         print $ENV{SCRIPT_NAME}
     });
 }
@@ -62,7 +62,7 @@ sub test_remote_user : Path('/cgi-bin/test_remote_user.cgi') Args(0) {
 
     $self->cgi_to_response($c, sub {
         my $cgi = CGI->new;
-        print $cgi->header;
+        print $cgi->header(-charset => 'utf-8');
         print $ENV{REMOTE_USER}
     });
 }

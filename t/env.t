@@ -6,6 +6,9 @@ use Catalyst::Controller::WrapCGI;
 
 my $obj = Catalyst::Controller::WrapCGI->new;
 
+# to suppress a warning from Catalyst
+BEGIN { *Catalyst::Controller::WrapCGI::_application = sub { 'dummy' }; }
+
 delete $ENV{MOD_PERL};
 
 my $want = {%ENV};

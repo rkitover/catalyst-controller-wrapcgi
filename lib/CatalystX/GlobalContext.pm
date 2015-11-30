@@ -13,10 +13,6 @@ our @EXPORT_OK = '$c';
 
 CatalystX::GlobalContext - Export Catalyst Context
 
-=cut
-
-our $VERSION = '0.035';
-
 =head1 SYNOPSIS
 
     package MyApp::Controller::Root;
@@ -49,11 +45,6 @@ then accessible through an export where you need it.
 You can then rip out C<Apache::> type things, and replace them with things based on
 C<$c>.
 
-What we really need is a set of C<Apache::> compatibility classes, but that doesn't
-exist yet.
-
-DO NOT USE THIS MODULE IN NEW CODE
-
 =head1 CLASS METHODS
 
 =head2 CatalystX::GlobalContext->set_context($c)
@@ -81,38 +72,13 @@ L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Catalyst-Controller-WrapCGI>.
 I will be notified, and then you'll automatically be notified of progress on
 your bug as I make changes.
 
-=head1 SUPPORT
-
-More information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Catalyst-Controller-WrapCGI>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Catalyst-Controller-WrapCGI>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Catalyst-Controller-WrapCGI>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Catalyst-Controller-WrapCGI>
-
-=back
-
 =head1 AUTHOR
 
-See L<Catalyst::Controller::WrapCGI/AUTHOR> and
-L<Catalyst::Controller::WrapCGI/CONTRIBUTORS>.
+Rafael Kitover <rkitover@gmail.com>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright (c) 2008-2009 L<Catalyst::Controller::WrapCGI/AUTHOR> and
+Copyright (c) 2008-2015 Rafael Kitover <rkitover@gmail.com> and
 L<Catalyst::Controller::WrapCGI/CONTRIBUTORS>.
 
 This program is free software; you can redistribute it and/or modify it
@@ -120,6 +86,6 @@ under the same terms as Perl itself.
 
 =cut
 
-1; # End of CatalystX::GlobalContext
+__PACKAGE__; # End of CatalystX::GlobalContext
 
 # vim: expandtab shiftwidth=4 ts=4 tw=80:

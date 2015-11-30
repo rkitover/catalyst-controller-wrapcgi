@@ -5,5 +5,5 @@ use warnings;
 
 use CGI ':standard';
 
-print header;
+print header(-charset => 'utf-8');
 print "THIS CGI SHOULD NOT RUN\n";
