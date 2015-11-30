@@ -6,7 +6,7 @@ use warnings;
 use FindBin '$Bin';
 use lib "$Bin/lib";
 
-use Test::More tests => 7;
+use Test::More tests => 8;
 
 use Catalyst::Test 'TestApp';
 use HTTP::Request::Common;
@@ -53,6 +53,13 @@ is($response->content, '/test_filepath_info/path//info',
 $response = request '/cgi-bin/mtfnpy/test_scriptname.cgi/foo/bar';
 is($response->content, '/cgi-bin/mtfnpy/test_scriptname.cgi',
     'SCRIPT_NAME is correct');
+
+$response = request POST '/cgi-bin/test_body_reset.cgi',
+    Content => 'bar',
+    User_Agent => 'perl/5',
+    Content_Type => 'text/xml';
+is($response->content, 'bar',
+    'seek $c->req->body back to 0 on POST');
 
 SKIP: {
   require Catalyst;

@@ -67,4 +67,18 @@ sub test_remote_user : Path('/cgi-bin/test_remote_user.cgi') Args(0) {
     });
 }
 
+sub test_body_reset : Path('/cgi-bin/test_body_reset.cgi') Args(0) {
+    my ($self, $c) = @_;
+
+    # read body and don't seek back to 0
+    my $body = $c->req->body;
+    { local $/; my $dummy = <$body>; }
+
+    $self->cgi_to_response($c, sub {
+        my $cgi = CGI->new('');
+        print $cgi->header(-charset => 'utf-8');
+        print <STDIN>;
+    });
+}
+
 1;

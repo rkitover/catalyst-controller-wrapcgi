@@ -158,6 +158,7 @@ sub wrap_cgi {
   $req->content_type($c->req->content_type); # set this now so we can override
 
   if ($body) { # Slurp from body filehandle
+    seek $body, 0, 0;
     local $/; $body_content = <$body>;
   } else {
     my $body_params = $c->req->body_parameters || {};
