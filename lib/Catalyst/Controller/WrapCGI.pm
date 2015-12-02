@@ -160,6 +160,7 @@ sub wrap_cgi {
   if ($body) { # Slurp from body filehandle
     seek $body, 0, 0;
     local $/; $body_content = <$body>;
+    seek $body, 0, 0; # reset for anyone else down the chain
   } else {
     my $body_params = $c->req->body_parameters || {};
 

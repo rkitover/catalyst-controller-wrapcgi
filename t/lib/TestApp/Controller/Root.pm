@@ -81,4 +81,23 @@ sub test_body_reset : Path('/cgi-bin/test_body_reset.cgi') Args(0) {
     });
 }
 
+sub test_body_post_reset : Path('/cgi-bin/test_body_post_reset.cgi') Args(0) {
+    my ($self, $c) = @_;
+
+    # read body and don't seek back to 0
+    my $body = $c->req->body;
+    { local $/; my $dummy = <$body>; }
+
+    $self->cgi_to_response($c, sub {
+        my $cgi = CGI->new('');
+        print $cgi->header(-charset => 'utf-8');
+        print <STDIN>;
+    });
+
+    # check the WrapCGI did a seek back to 0
+    my $body_content = do { local $/; <$body> };
+
+    $c->res->body($c->res->body . $body_content);
+}
+
 1;

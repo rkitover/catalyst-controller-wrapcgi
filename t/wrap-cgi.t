@@ -6,7 +6,7 @@ use warnings;
 use FindBin '$Bin';
 use lib "$Bin/lib";
 
-use Test::More tests => 8;
+use Test::More tests => 9;
 
 use Catalyst::Test 'TestApp';
 use HTTP::Request::Common;
@@ -60,6 +60,13 @@ $response = request POST '/cgi-bin/test_body_reset.cgi',
     Content_Type => 'text/xml';
 is($response->content, 'bar',
     'seek $c->req->body back to 0 on POST');
+
+$response = request POST '/cgi-bin/test_body_post_reset.cgi',
+    Content => 'baz',
+    User_Agent => 'perl/5',
+    Content_Type => 'text/xml';
+is($response->content, 'bazbaz',
+    'seek $c->req->body back to 0 on after WrapCGI POST processing');
 
 SKIP: {
   require Catalyst;
