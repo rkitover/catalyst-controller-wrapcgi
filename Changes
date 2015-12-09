@@ -1,6 +1,8 @@
 Revision history for Catalyst-Controller-WrapCGI
 
 {{$NEXT}}
+    - set CGI test dep to 3.31, lower versions fail file upload test on
+      smokers
 
 0.037 2015-12-02 14:04:56
     - seek body fh back to 0 for the next guy down the chain as well
