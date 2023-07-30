@@ -1,3 +1,4 @@
 .*.sw[nop]
+.*.un~
 .build/
 Catalyst-Controller-WrapCGI-*
